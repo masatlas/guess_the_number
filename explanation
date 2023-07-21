@@ -1,0 +1,69 @@
+explanation:
+In summary, the "Guess the Number" game generates a secret number within a given range, prompts the player 
+to guess the number, checks if the guess is correct or not, and provides feedback to the player until they correctly guess the secret number. 
+The game uses the console to interact with the player, and the program will keep running until the player wins by guessing the correct number.
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+#include <iostream>: This line includes the input-output stream library, which allows the program to interact with the user through the console. It lets us read input from the user and print output to the console.
+
+#include <ctime>: This line includes the time library, which is used to generate random numbers based on the current time. This ensures that the random number changes each time the game is played.
+
+#include <cstdlib>: This line includes the C Standard Library's general utilities, which includes functions like rand() for generating random numbers.
+
+using namespace std;: This line tells the program to use the std namespace, which contains various standard C++ functions and objects. In simpler terms, it lets us use cout, cin, and other standard features without explicitly mentioning std:: before each one.
+
+
+int main() {
+    const int minNumber = 1;
+    const int maxNumber = 100;
+    int secretNumber, guess;
+    bool isGuessed = false;
+int main() {: This is the main function of the program. It's the starting point where the program execution begins.
+
+const int minNumber = 1; and const int maxNumber = 100;: These lines declare two constant integers, minNumber and maxNumber, which define the range of numbers that the player needs to guess between. In this game, the player will guess a number between 1 and 100.
+
+int secretNumber, guess;: These lines declare two integer variables, secretNumber and guess, which will store the randomly generated secret number and the player's guess, respectively.
+
+bool isGuessed = false;: This line declares a boolean variable isGuessed and initializes it to false. This variable will be used to track whether the player has correctly guessed the number.
+
+
+    srand(static_cast<unsigned int>(time(0)));
+srand(static_cast<unsigned int>(time(0)));: This line seeds the random number generator with the current time. In simpler terms, it sets the starting point for generating random numbers based on the current time, so each time the game is played, the secret number will be different.
+
+    secretNumber = rand() % (maxNumber - minNumber + 1) + minNumber;
+secretNumber = rand() % (maxNumber - minNumber + 1) + minNumber;: This line generates the secret number using the rand() function. The % operator calculates the remainder of dividing the random number by (maxNumber - minNumber + 1), which is the range of possible numbers. Then we add minNumber to the result to ensure the secret number is within the specified range.
+
+    cout << "Welcome to the Guess the Number game!\n";
+    cout << "Try to guess a number between " << minNumber << " and " << maxNumber << ".\n";
+cout << "Welcome to the Guess the Number game!\n"; and cout << "Try to guess a number between " << minNumber << " and " << maxNumber << ".\n";: These lines use cout to display welcome messages to the player, explaining the rules of the game and the range of numbers to guess between.
+
+    while (!isGuessed) {
+        cout << "Enter your guess: ";
+        cin >> guess;
+while (!isGuessed) {: This line starts a loop that continues until isGuessed becomes true. In simpler terms, the loop will keep running until the player guesses the correct number.
+
+cout << "Enter your guess: ";: This line asks the player to enter their guess by displaying a message.
+
+cin >> guess;: This line reads the player's input from the console and stores it in the guess variable.
+
+
+        if (cin.fail()) {
+            cout << "Invalid input. Please enter a valid number.\n";
+            cin.clear();
+            cin.ignore(10000, '\n');
+        } else {
+            // Rest of the code for checking if the guess is correct or not
+        }
+if (cin.fail()) { ... } else { ... }: This part checks if the player's input is not a valid number. If the input is invalid (e.g., if the player enters letters instead of a number), the program will display an error message and clear the input buffer to prevent any issues with future input.
+The rest of the code inside the else block is responsible for checking if the player's guess is correct and providing feedback based on whether the guess is too low, too high, or correct. If the guess is correct, the isGuessed variable is set to true, which will exit the while loop and end the game.
+
+    }
+
+    return 0;
+}
+}: This closing curly brace marks the end of the while loop.
+
+return 0;: This line signals the end of the main() function and tells the program that everything ran successfully. The 0 means the program terminated without any errors.
